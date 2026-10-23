@@ -67,7 +67,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
   const [zoom, setZoom] = useState(14);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isLayerMenuOpen, setIsLayerMenuOpen] = useState(false);
-  const [mapType, setMapType] = useState<MapTileType>('hybrid');
+  const [mapType, setMapType] = useState<MapTileType>('dark');
   const [isBottomSheetExpanded, setIsBottomSheetExpanded] = useState(false);
 
   const [filters, setFilters] = useState({
@@ -110,18 +110,18 @@ export const MapScreen: React.FC<MapScreenProps> = ({
 
         {/* Floating Top-Right Map Controls */}
         <div className="absolute top-4 right-4 z-20 flex flex-col gap-2.5">
-          {/* Google Maps Layer Switcher */}
+          {/* CARTO Basemap Layer Switcher */}
           <button
             onClick={() => {
               setIsLayerMenuOpen(!isLayerMenuOpen);
               setIsFilterOpen(false);
             }}
             className={`w-11 h-11 rounded-2xl border shadow-xl backdrop-blur-md flex items-center justify-center transition transform active:scale-95 ${
-              mapType.includes('satellite') || mapType === 'hybrid'
-                ? 'bg-indigo-600 text-white border-indigo-400'
-                : 'bg-zinc-900/90 text-zinc-300 hover:text-white border-zinc-800 hover:bg-zinc-800'
+              isLayerMenuOpen
+                ? 'bg-white text-zinc-950 border-white/80'
+                : 'bg-zinc-950/80 text-zinc-300 hover:text-white border-white/10 hover:bg-white/[0.08]'
             }`}
-            title="Google Maps Супутник / Шари карти"
+            title="Стилі карти CARTO"
           >
             <Layers className="w-5 h-5" />
           </button>
@@ -161,67 +161,14 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           </button>
         </div>
 
-        {/* Floating Google Maps Layer Switcher Popover */}
+        {/* Floating CARTO Layer Switcher Popover */}
         {isLayerMenuOpen && (
-          <div className="absolute top-16 right-4 z-30 w-64 bg-zinc-900/95 border border-zinc-800 rounded-2xl p-2 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150">
-            <div className="px-2.5 py-1.5 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
-              Режим Google Maps:
+          <div className="absolute top-16 right-4 z-30 w-64 bg-zinc-950/95 border border-white/10 rounded-2xl p-2 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150">
+            <div className="px-2.5 py-1.5 text-[11px] font-bold text-zinc-400 uppercase tracking-wider flex items-center justify-between">
+              <span>Стиль карти CARTO:</span>
+              <span className="text-[10px] text-indigo-400 font-mono">Basemaps</span>
             </div>
             <div className="space-y-1">
-              <button
-                onClick={() => {
-                  setMapType('hybrid');
-                  setIsLayerMenuOpen(false);
-                }}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition ${
-                  mapType === 'hybrid'
-                    ? 'bg-indigo-600 text-white font-bold'
-                    : 'text-zinc-200 hover:bg-zinc-800'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <span>🛰️</span>
-                  <span>Google Супутник (Гібрид)</span>
-                </div>
-                {mapType === 'hybrid' && <span>✓</span>}
-              </button>
-
-              <button
-                onClick={() => {
-                  setMapType('satellite');
-                  setIsLayerMenuOpen(false);
-                }}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition ${
-                  mapType === 'satellite'
-                    ? 'bg-indigo-600 text-white font-bold'
-                    : 'text-zinc-200 hover:bg-zinc-800'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <span>🛰️</span>
-                  <span>Google Супутник (Фото)</span>
-                </div>
-                {mapType === 'satellite' && <span>✓</span>}
-              </button>
-
-              <button
-                onClick={() => {
-                  setMapType('roadmap');
-                  setIsLayerMenuOpen(false);
-                }}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition ${
-                  mapType === 'roadmap'
-                    ? 'bg-indigo-600 text-white font-bold'
-                    : 'text-zinc-200 hover:bg-zinc-800'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <span>🗺️</span>
-                  <span>Google Схема доріг</span>
-                </div>
-                {mapType === 'roadmap' && <span>✓</span>}
-              </button>
-
               <button
                 onClick={() => {
                   setMapType('dark');
@@ -229,15 +176,51 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                 }}
                 className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition ${
                   mapType === 'dark'
-                    ? 'bg-indigo-600 text-white font-bold'
-                    : 'text-zinc-200 hover:bg-zinc-800'
+                    ? 'bg-white text-zinc-950 font-bold shadow-md'
+                    : 'text-zinc-200 hover:bg-white/[0.06]'
                 }`}
               >
                 <div className="flex items-center gap-2">
                   <span>🌃</span>
-                  <span>Темна нічна карта</span>
+                  <span>CARTO Dark Matter (Темна)</span>
                 </div>
-                {mapType === 'dark' && <span>✓</span>}
+                {mapType === 'dark' && <span className="text-zinc-950 font-bold">✓</span>}
+              </button>
+
+              <button
+                onClick={() => {
+                  setMapType('voyager');
+                  setIsLayerMenuOpen(false);
+                }}
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition ${
+                  mapType === 'voyager'
+                    ? 'bg-white text-zinc-950 font-bold shadow-md'
+                    : 'text-zinc-200 hover:bg-white/[0.06]'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <span>🧭</span>
+                  <span>CARTO Voyager (Навігація)</span>
+                </div>
+                {mapType === 'voyager' && <span className="text-zinc-950 font-bold">✓</span>}
+              </button>
+
+              <button
+                onClick={() => {
+                  setMapType('positron');
+                  setIsLayerMenuOpen(false);
+                }}
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition ${
+                  mapType === 'positron'
+                    ? 'bg-white text-zinc-950 font-bold shadow-md'
+                    : 'text-zinc-200 hover:bg-white/[0.06]'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <span>☀️</span>
+                  <span>CARTO Positron (Світла)</span>
+                </div>
+                {mapType === 'positron' && <span className="text-zinc-950 font-bold">✓</span>}
               </button>
             </div>
           </div>
@@ -326,38 +309,40 @@ export const MapScreen: React.FC<MapScreenProps> = ({
         )}
 
         {/* Legend pill at bottom-left of map */}
-        <div className="absolute top-4 left-4 z-20 hidden sm:flex items-center gap-3 px-3 py-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-[11px] text-zinc-300 backdrop-blur-md shadow-lg">
+        <div className="absolute top-4 left-4 z-20 hidden sm:flex items-center gap-3 px-3 py-1.5 rounded-full bg-zinc-950/70 border border-white/[0.08] text-[11px] text-zinc-300 backdrop-blur-xl shadow-lg">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
             <span>{t.map.friendly}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+            <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_#f59e0b]" />
             <span>{t.map.neutral}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+            <span className="w-2 h-2 rounded-full bg-rose-400 shadow-[0_0_6px_#f43f5e]" />
             <span>{t.map.cautious}</span>
           </div>
         </div>
 
-        {/* Central Prominent FAB: [ 🐾 ПОЧАТИ ВИГУЛ ] */}
-        <div className="absolute bottom-24 sm:bottom-28 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
+        {/* Web 3.0 White Capsule Start Walk Button (Compact, Single-Line, Pristine Glow) */}
+        <div className="absolute bottom-28 sm:bottom-32 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
           <button
             onClick={onStartWalk}
-            className="group relative px-7 py-4 rounded-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-sm tracking-wider uppercase shadow-2xl shadow-indigo-600/60 border-2 border-indigo-400/50 flex items-center gap-3 transition transform active:scale-95 hover:scale-105"
+            className="group relative flex items-center gap-2 px-4 py-2 rounded-full bg-white text-zinc-950 font-bold text-xs tracking-tight shadow-[0_8px_32px_rgba(255,255,255,0.32),0_2px_8px_rgba(0,0,0,0.8)] border border-white/90 hover:bg-zinc-50 hover:shadow-[0_12px_40px_rgba(255,255,255,0.45)] active:scale-95 transition-all duration-200 select-none whitespace-nowrap"
           >
-            <span className="absolute -inset-1 rounded-full bg-indigo-500 animate-pulse opacity-40 blur-sm pointer-events-none" />
-            <span className="text-xl group-hover:rotate-12 transition-transform">🐾</span>
-            <span className="relative z-10">{t.nav.start_walk}</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping ml-0.5" />
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_6px_#10b981]" />
+            </span>
+            <span className="text-sm">🐾</span>
+            <span className="whitespace-nowrap font-bold text-zinc-950">{t.nav.start_walk}</span>
           </button>
         </div>
       </div>
 
-      {/* Bottom Sheet: Nearby Dogs & Partner Card */}
+      {/* Modern Web 3.0 Glass Bottom Sheet: Nearby Dogs & Partner Card */}
       <div
-        className={`relative z-20 bg-zinc-900 border-t border-zinc-800/90 rounded-t-3xl shadow-2xl transition-all duration-300 ${
+        className={`relative z-20 bg-zinc-950/80 backdrop-blur-2xl border-t border-white/[0.08] rounded-t-3xl shadow-[0_-12px_40px_rgba(0,0,0,0.7)] transition-all duration-300 ${
           isBottomSheetExpanded ? 'h-72 sm:h-80' : 'h-24 sm:h-28'
         }`}
       >
@@ -366,15 +351,15 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           onClick={() => setIsBottomSheetExpanded(!isBottomSheetExpanded)}
           className="w-full pt-2.5 pb-2 px-4 cursor-pointer flex flex-col items-center select-none"
         >
-          <div className="w-12 h-1 rounded-full bg-zinc-700/80 mb-2" />
+          <div className="w-10 h-1 rounded-full bg-white/20 mb-2" />
           <div className="w-full flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-white flex items-center gap-1.5">
-                <Dog className="w-4 h-4 text-indigo-400" />
+              <span className="font-semibold text-white flex items-center gap-1.5 tracking-tight">
+                <Dog className="w-3.5 h-3.5 text-indigo-400" />
                 {t.map.nearby_dogs_title} ({districtDogs.length})
               </span>
               <span className="text-[11px] text-zinc-400 hidden xs:inline">
-                • {currentDistrict.name_json.uk}
+                · {currentDistrict.name_json.uk}
               </span>
             </div>
             <div className="flex items-center gap-1 text-zinc-400 text-xs">
@@ -387,61 +372,61 @@ export const MapScreen: React.FC<MapScreenProps> = ({
         {/* Horizontal or Vertical scroll of dogs */}
         <div className="px-4 pb-4 overflow-y-auto h-[calc(100%-48px)] space-y-2.5">
           {/* Nearby Dogs Cards */}
-          <div className="flex gap-3 overflow-x-auto pb-1 no-scrollbar">
+          <div className="flex gap-2.5 overflow-x-auto pb-1 no-scrollbar">
             {districtDogs.map((dog) => (
               <div
                 key={dog.id}
                 onClick={() => onSelectDog(dog)}
-                className="flex-shrink-0 w-60 bg-zinc-800/70 hover:bg-zinc-800 border border-zinc-700/60 rounded-2xl p-2.5 cursor-pointer transition flex items-center gap-2.5 shadow-sm"
+                className="flex-shrink-0 w-60 bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.08] hover:border-white/20 rounded-2xl p-2.5 cursor-pointer transition-all flex items-center gap-2.5 shadow-sm"
               >
                 <div className="relative">
-                  <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-indigo-500 bg-zinc-900 flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20 bg-zinc-900 flex-shrink-0">
                     <img src={dog.pet.avatar_url} alt={dog.pet.name} className="w-full h-full object-cover" />
                   </div>
                   <span
-                    className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-zinc-900 ${
+                    className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border border-zinc-950 ${
                       dog.pet.temperament === 'friendly'
-                        ? 'bg-emerald-500'
+                        ? 'bg-emerald-500 shadow-[0_0_6px_#10b981]'
                         : dog.pet.temperament === 'neutral'
-                        ? 'bg-amber-500'
-                        : 'bg-rose-500'
+                        ? 'bg-amber-500 shadow-[0_0_6px_#f59e0b]'
+                        : 'bg-rose-500 shadow-[0_0_6px_#f43f5e]'
                     }`}
                   />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <h5 className="text-xs font-bold text-white truncate">{dog.pet.name}</h5>
-                    <span className="text-[10px] text-indigo-400 font-semibold">{dog.walk_duration_mins} хв</span>
+                    <h5 className="text-xs font-bold text-white truncate tracking-tight">{dog.pet.name}</h5>
+                    <span className="text-[10px] text-indigo-400 font-mono font-medium">{dog.walk_duration_mins} хв</span>
                   </div>
                   <p className="text-[10px] text-zinc-400 truncate">{dog.pet.breed}</p>
-                  <p className="text-[10px] text-zinc-500">Пройдено: {dog.distance_walked_km} км</p>
+                  <p className="text-[10px] text-zinc-500">{dog.distance_walked_km} км</p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Native Partner Perk Card */}
+          {/* Native Partner Perk Card with Web 3.0 Glass Border */}
           {activePartner && (
             <div
               onClick={() => onSelectPerk(activePartner)}
-              className="bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-zinc-900 border border-indigo-500/30 rounded-2xl p-3 flex items-center justify-between gap-3 cursor-pointer hover:border-indigo-500/60 transition shadow-lg"
+              className="bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-zinc-900/60 border border-white/[0.09] hover:border-indigo-500/40 rounded-2xl p-3 flex items-center justify-between gap-3 cursor-pointer transition-all shadow-lg"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-indigo-600/30 border border-indigo-400/40 flex items-center justify-center text-indigo-300 font-bold text-sm">
+                <div className="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-sm">
                   🎁
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[9px] uppercase font-black px-1.5 py-0.5 rounded bg-indigo-600/40 text-indigo-300 border border-indigo-500/30">
+                    <span className="text-[9px] uppercase font-bold px-1.5 py-0.2 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
                       {t.map.partner_card_badge}
                     </span>
                     <span className="text-xs font-bold text-amber-300">{activePartner.discount_label}</span>
                   </div>
                   <p className="text-xs font-semibold text-white mt-0.5">{activePartner.title}</p>
-                  <p className="text-[10px] text-zinc-400">{activePartner.business_name} • {activePartner.address}</p>
+                  <p className="text-[10px] text-zinc-400">{activePartner.business_name} · {activePartner.address}</p>
                 </div>
               </div>
-              <button className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold shadow-md transition flex-shrink-0">
+              <button className="px-3 py-1.5 rounded-full bg-white text-zinc-950 text-[11px] font-bold shadow-md hover:bg-zinc-100 transition flex-shrink-0">
                 {t.map.partner_get_discount}
               </button>
             </div>

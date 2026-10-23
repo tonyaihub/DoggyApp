@@ -73,21 +73,21 @@ export const HazardRadarModal: React.FC<HazardRadarModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full max-w-lg bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="w-full max-w-lg bg-zinc-950/90 border border-white/10 rounded-3xl p-6 shadow-[0_24px_64px_rgba(0,0,0,0.8)] backdrop-blur-2xl max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center">
-              <ShieldAlert className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+              <ShieldAlert className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">{t.hazard.title}</h3>
+              <h3 className="text-base font-bold text-white tracking-tight">{t.hazard.title}</h3>
               <p className="text-xs text-zinc-400">{t.hazard.subtitle}</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center text-sm font-bold"
+            className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/10 text-zinc-400 hover:text-white flex items-center justify-center text-sm font-bold transition"
           >
             ✕
           </button>
@@ -104,10 +104,10 @@ export const HazardRadarModal: React.FC<HazardRadarModalProps> = ({
                   setCategory('hazard');
                   setSubCategory('poison');
                 }}
-                className={`py-2.5 px-3 rounded-xl border text-xs font-semibold flex flex-col items-center gap-1.5 transition ${
+                className={`py-2.5 px-3 rounded-2xl border text-xs font-semibold flex flex-col items-center gap-1.5 transition ${
                   category === 'hazard'
-                    ? 'bg-rose-500/20 border-rose-500 text-rose-300 shadow-md shadow-rose-950/40'
-                    : 'bg-zinc-800/60 border-zinc-700 text-zinc-400 hover:bg-zinc-800'
+                    ? 'bg-rose-500/20 border-rose-500/50 text-rose-300 shadow-[0_4px_16px_rgba(244,63,94,0.25)]'
+                    : 'bg-white/[0.03] border-white/[0.07] text-zinc-400 hover:bg-white/[0.06]'
                 }`}
               >
                 <AlertTriangle className="w-4 h-4 text-rose-400" />
@@ -120,10 +120,10 @@ export const HazardRadarModal: React.FC<HazardRadarModalProps> = ({
                   setCategory('stray_dog');
                   setSubCategory('stray_pack');
                 }}
-                className={`py-2.5 px-3 rounded-xl border text-xs font-semibold flex flex-col items-center gap-1.5 transition ${
+                className={`py-2.5 px-3 rounded-2xl border text-xs font-semibold flex flex-col items-center gap-1.5 transition ${
                   category === 'stray_dog'
-                    ? 'bg-orange-500/20 border-orange-500 text-orange-300 shadow-md shadow-orange-950/40'
-                    : 'bg-zinc-800/60 border-zinc-700 text-zinc-400 hover:bg-zinc-800'
+                    ? 'bg-orange-500/20 border-orange-500/50 text-orange-300 shadow-[0_4px_16px_rgba(249,115,22,0.25)]'
+                    : 'bg-white/[0.03] border-white/[0.07] text-zinc-400 hover:bg-white/[0.06]'
                 }`}
               >
                 <Dog className="w-4 h-4 text-orange-400" />
@@ -136,10 +136,10 @@ export const HazardRadarModal: React.FC<HazardRadarModalProps> = ({
                   setCategory('useful_spot');
                   setSubCategory('dog_box');
                 }}
-                className={`py-2.5 px-3 rounded-xl border text-xs font-semibold flex flex-col items-center gap-1.5 transition ${
+                className={`py-2.5 px-3 rounded-2xl border text-xs font-semibold flex flex-col items-center gap-1.5 transition ${
                   category === 'useful_spot'
-                    ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300 shadow-md shadow-emerald-950/40'
-                    : 'bg-zinc-800/60 border-zinc-700 text-zinc-400 hover:bg-zinc-800'
+                    ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300 shadow-[0_4px_16px_rgba(16,185,129,0.25)]'
+                    : 'bg-white/[0.03] border-white/[0.07] text-zinc-400 hover:bg-white/[0.06]'
                 }`}
               >
                 <CheckCircle className="w-4 h-4 text-emerald-400" />
@@ -234,7 +234,7 @@ export const HazardRadarModal: React.FC<HazardRadarModalProps> = ({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Опишіть орієнтир: біля кущів, лавочки, номер будинку..."
-              className="w-full bg-zinc-800/80 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+              className="w-full bg-white/[0.04] border border-white/[0.09] focus:border-rose-500/50 rounded-2xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none transition-all leading-relaxed"
             />
           </div>
 
@@ -254,23 +254,23 @@ export const HazardRadarModal: React.FC<HazardRadarModalProps> = ({
             </div>
 
             {photoPreview ? (
-              <div className="relative rounded-xl overflow-hidden border border-zinc-700 h-32">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 h-32">
                 <img src={photoPreview} alt="Preview" className="w-full h-full object-cover" />
               </div>
             ) : (
               <button
                 type="button"
                 onClick={handleSimulatedPhoto}
-                className="w-full border-2 border-dashed border-zinc-700 rounded-xl py-4 flex flex-col items-center justify-center gap-1.5 text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition"
+                className="w-full border border-dashed border-white/15 rounded-2xl py-3.5 flex flex-col items-center justify-center gap-1 text-zinc-400 hover:text-zinc-200 hover:border-white/30 transition bg-white/[0.02]"
               >
-                <Camera className="w-5 h-5 text-indigo-400" />
+                <Camera className="w-4 h-4 text-indigo-400" />
                 <span className="text-xs">Сфотографувати або завантажити</span>
               </button>
             )}
           </div>
 
           {/* Dynamic TTL Indicator */}
-          <div className="rounded-xl bg-zinc-800/60 p-3 border border-zinc-700/60 flex items-center gap-3 text-xs text-zinc-400">
+          <div className="rounded-2xl bg-white/[0.03] p-3 border border-white/[0.07] flex items-center gap-3 text-xs text-zinc-400">
             <Clock className="w-4 h-4 text-indigo-400 flex-shrink-0" />
             <div>
               <span className="text-zinc-300 font-medium">Час життя мітки (TTL): </span>
@@ -283,7 +283,7 @@ export const HazardRadarModal: React.FC<HazardRadarModalProps> = ({
           </div>
 
           {/* GPS Coordinates preview */}
-          <div className="flex items-center gap-2 text-xs text-zinc-500">
+          <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
             <MapPin className="w-3.5 h-3.5 text-zinc-400" />
             <span>
               GPS: {userLocation.lat.toFixed(5)}, {userLocation.lng.toFixed(5)} (Запоріжжя)
@@ -295,16 +295,16 @@ export const HazardRadarModal: React.FC<HazardRadarModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-3 rounded-xl bg-zinc-800 text-zinc-300 text-sm font-semibold hover:bg-zinc-700 transition"
+              className="flex-1 py-2.5 rounded-full bg-white/[0.05] border border-white/10 text-zinc-300 text-xs font-semibold hover:bg-white/[0.1] transition active:scale-95"
             >
               Скасувати
             </button>
             <button
               type="submit"
               disabled={isSubmitting || !comment.trim()}
-              className="flex-1 py-3 rounded-xl bg-rose-600 hover:bg-rose-500 disabled:opacity-50 text-white text-sm font-bold shadow-lg shadow-rose-950/50 transition flex items-center justify-center gap-2"
+              className="flex-1 py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 disabled:opacity-40 text-xs font-bold shadow-[0_4px_20px_rgba(255,255,255,0.25)] transition flex items-center justify-center gap-1.5 active:scale-95"
             >
-              <ShieldAlert className="w-4 h-4" />
+              <ShieldAlert className="w-3.5 h-3.5 text-rose-600" />
               <span>{isSubmitting ? 'Публікація...' : t.hazard.publish}</span>
             </button>
           </div>

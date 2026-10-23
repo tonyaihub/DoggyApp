@@ -25,28 +25,28 @@ export const PartnerPerkModal: React.FC<PartnerPerkModalProps> = ({ perk, onClos
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-150">
+      <div className="w-full max-w-sm bg-zinc-950/90 border border-white/10 rounded-3xl p-6 shadow-[0_24px_64px_rgba(0,0,0,0.8)] backdrop-blur-2xl relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center text-sm font-bold"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/[0.05] border border-white/10 text-zinc-400 hover:text-white flex items-center justify-center text-sm font-bold transition"
         >
           ✕
         </button>
 
         <div className="text-center">
-          <div className="w-16 h-16 rounded-3xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/40 mx-auto flex items-center justify-center text-3xl mb-3 shadow-xl shadow-indigo-950/40">
+          <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 mx-auto flex items-center justify-center text-2xl mb-3 shadow-lg">
             🎁
           </div>
 
-          <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-black text-xs uppercase tracking-wider">
+          <span className="px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 font-bold text-[10px] uppercase tracking-wider">
             {perk.discount_label} ЗНИЖКА
           </span>
 
-          <h3 className="text-xl font-bold text-white mt-2">{perk.title}</h3>
+          <h3 className="text-lg font-bold text-white mt-2 tracking-tight">{perk.title}</h3>
           <p className="text-xs text-indigo-400 font-semibold">{perk.business_name}</p>
 
-          <p className="text-xs text-zinc-300 mt-3 bg-zinc-800/40 p-3 rounded-2xl border border-zinc-800 text-left leading-relaxed">
+          <p className="text-xs text-zinc-300 mt-3 bg-white/[0.03] p-3 rounded-2xl border border-white/[0.07] text-left leading-relaxed">
             {perk.description}
           </p>
 
@@ -62,16 +62,16 @@ export const PartnerPerkModal: React.FC<PartnerPerkModalProps> = ({ perk, onClos
           </div>
 
           {/* Promo code block */}
-          <div className="mt-4 p-3 rounded-2xl bg-zinc-800/80 border border-zinc-700 flex items-center justify-between gap-2">
+          <div className="mt-4 p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-2">
             <div className="text-left">
-              <span className="block text-[10px] text-zinc-400 uppercase tracking-wider font-bold">Промокод</span>
+              <span className="block text-[9px] text-zinc-400 uppercase tracking-widest font-mono font-bold">Промокод</span>
               <span className="text-sm font-mono font-black text-amber-300 tracking-wider">{perk.promo_code}</span>
             </div>
             <button
               onClick={handleCopyCode}
-              className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition flex items-center gap-1.5 shadow"
+              className="px-3.5 py-1.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-bold transition flex items-center gap-1.5 shadow-[0_2px_12px_rgba(255,255,255,0.2)] active:scale-95"
             >
-              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Скопійовано' : 'Копіювати'}</span>
             </button>
           </div>

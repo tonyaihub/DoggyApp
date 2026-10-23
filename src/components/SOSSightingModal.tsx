@@ -63,11 +63,11 @@ export const SOSSightingModal: React.FC<SOSSightingModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="w-full max-w-md bg-zinc-950/90 border border-white/10 rounded-3xl p-6 shadow-[0_24px_64px_rgba(0,0,0,0.8)] backdrop-blur-2xl relative">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center text-sm font-bold"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/[0.05] border border-white/10 text-zinc-400 hover:text-white flex items-center justify-center text-sm font-bold transition"
         >
           ✕
         </button>
@@ -77,28 +77,28 @@ export const SOSSightingModal: React.FC<SOSSightingModalProps> = ({
             <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center animate-bounce">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h3 className="text-xl font-bold text-white">{t.sos.sighting_success}</h3>
-            <p className="text-sm text-zinc-400">
+            <h3 className="text-xl font-bold text-white tracking-tight">{t.sos.sighting_success}</h3>
+            <p className="text-xs text-zinc-400">
               Господар {sosAlert.owner_name} отримав сповіщення з вашою GPS-точкою та фото!
             </p>
           </div>
         ) : (
           <div>
-            <div className="flex items-center gap-3 pb-4 border-b border-zinc-800">
+            <div className="flex items-center gap-3 pb-4 border-b border-white/[0.08]">
               <div className="w-12 h-12 rounded-2xl overflow-hidden border border-rose-500/40 flex-shrink-0">
                 <img src={sosAlert.pet_avatar} alt={sosAlert.pet_name} className="w-full h-full object-cover" />
               </div>
               <div>
-                <span className="inline-block px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold uppercase mb-1">
+                <span className="inline-block px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-bold uppercase mb-1 border border-rose-500/30">
                   SOS • {sosAlert.pet_breed}
                 </span>
-                <h3 className="text-lg font-bold text-white">
+                <h3 className="text-base font-bold text-white tracking-tight">
                   {t.sos.sighting_modal_title} ({sosAlert.pet_name})
                 </h3>
               </div>
             </div>
 
-            <div className="mt-3 p-3 rounded-xl bg-rose-950/30 border border-rose-900/50 flex items-start gap-2.5 text-xs text-rose-200">
+            <div className="mt-3 p-3 rounded-2xl bg-rose-950/25 border border-rose-500/20 flex items-start gap-2.5 text-xs text-rose-200">
               <AlertCircle className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
               <span>{t.sos.sighting_instruction}</span>
             </div>
@@ -114,7 +114,7 @@ export const SOSSightingModal: React.FC<SOSSightingModalProps> = ({
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                   placeholder="Біг у бік зупинки, кульгає на задню лапу, п'є воду біля магазину..."
-                  className="w-full bg-zinc-800/80 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-rose-500/50 rounded-2xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none transition leading-relaxed"
                 />
               </div>
 
@@ -125,7 +125,7 @@ export const SOSSightingModal: React.FC<SOSSightingModalProps> = ({
                   value={reporterPhone}
                   onChange={(e) => setReporterPhone(e.target.value)}
                   placeholder="+380..."
-                  className="w-full bg-zinc-800/80 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-rose-500/50 rounded-2xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none transition"
                 />
               </div>
 
@@ -144,14 +144,14 @@ export const SOSSightingModal: React.FC<SOSSightingModalProps> = ({
                 </div>
 
                 {photoUrl ? (
-                  <div className="relative rounded-xl overflow-hidden border border-zinc-700 h-28">
+                  <div className="relative rounded-2xl overflow-hidden border border-white/10 h-28">
                     <img src={photoUrl} alt="Sighting photo" className="w-full h-full object-cover" />
                   </div>
                 ) : (
                   <button
                     type="button"
                     onClick={handleSimulatedPhoto}
-                    className="w-full border border-dashed border-zinc-700 rounded-xl py-3 flex items-center justify-center gap-2 text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition text-xs"
+                    className="w-full border border-dashed border-white/15 rounded-2xl py-3 flex items-center justify-center gap-2 text-zinc-400 hover:text-zinc-200 hover:border-white/30 transition text-xs bg-white/[0.02]"
                   >
                     <Camera className="w-4 h-4 text-indigo-400" />
                     <span>Додати фото собаки</span>
@@ -159,8 +159,8 @@ export const SOSSightingModal: React.FC<SOSSightingModalProps> = ({
                 )}
               </div>
 
-              <div className="rounded-xl bg-zinc-800/50 p-2.5 flex items-center gap-2 text-xs text-zinc-400">
-                <MapPin className="w-4 h-4 text-rose-400" />
+              <div className="rounded-2xl bg-white/[0.03] border border-white/[0.07] p-2.5 flex items-center gap-2 text-[11px] text-zinc-400 font-mono">
+                <MapPin className="w-3.5 h-3.5 text-rose-400" />
                 <span>
                   Точка фіксації: {userLocation.lat.toFixed(5)}, {userLocation.lng.toFixed(5)}
                 </span>
@@ -169,9 +169,9 @@ export const SOSSightingModal: React.FC<SOSSightingModalProps> = ({
               <button
                 type="submit"
                 disabled={!comment.trim()}
-                className="w-full py-3.5 rounded-xl bg-rose-600 hover:bg-rose-500 disabled:opacity-50 text-white font-bold text-sm shadow-xl shadow-rose-950/60 transition flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 disabled:opacity-40 font-bold text-xs shadow-[0_4px_20px_rgba(255,255,255,0.25)] transition flex items-center justify-center gap-1.5 active:scale-95"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-3.5 h-3.5 text-zinc-950" />
                 <span>{t.sos.sighting_send}</span>
               </button>
             </form>

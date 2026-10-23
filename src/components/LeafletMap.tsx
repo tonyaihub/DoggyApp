@@ -16,7 +16,7 @@ import {
   DistrictEntity,
 } from '../types/database';
 
-export type MapTileType = 'hybrid' | 'satellite' | 'roadmap' | 'dark';
+export type MapTileType = 'dark' | 'voyager' | 'positron';
 
 interface LeafletMapProps {
   center: GeoPoint;
@@ -53,7 +53,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
   partnerPerks,
   activeRoutePoints = [],
   userLocation,
-  mapType = 'hybrid',
+  mapType = 'dark',
   onMapTypeChange,
   activeFilters,
   onSelectDog,
@@ -70,46 +70,40 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
   const userMarkerRef = useRef<L.Marker | null>(null);
 
   const getTileConfig = (type: MapTileType) => {
-    if (type === 'hybrid') {
-      // Google Maps Satellite + Streets/Labels Hybrid (Free public endpoint)
+    const cartoApiKey = (import.meta as any).env?.VITE_CARTO_API_KEY;
+    const query = cartoApiKey ? `?api_key=${cartoApiKey}` : '';
+
+    if (type === 'voyager') {
+      // CARTO Voyager (Clean, colorful street navigation)
       return {
-        url: 'https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+        url: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png${query}`,
         options: {
           maxZoom: 20,
-          subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-          attribution: 'Картографічні дані &copy; Google Maps (Супутник)',
+          subdomains: ['a', 'b', 'c', 'd'],
+          attribution: '&copy; CARTO &copy; OpenStreetMap contributors',
         },
       };
     }
-    if (type === 'satellite') {
-      // Pure Google Satellite
+
+    if (type === 'positron') {
+      // CARTO Positron (Light minimalist)
       return {
-        url: 'https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+        url: `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png${query}`,
         options: {
           maxZoom: 20,
-          subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-          attribution: 'Картографічні дані &copy; Google Maps (Супутник)',
+          subdomains: ['a', 'b', 'c', 'd'],
+          attribution: '&copy; CARTO &copy; OpenStreetMap contributors',
         },
       };
     }
-    if (type === 'roadmap') {
-      // Google Maps Standard Road Map
-      return {
-        url: 'https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
-        options: {
-          maxZoom: 20,
-          subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-          attribution: 'Картографічні дані &copy; Google Maps',
-        },
-      };
-    }
-    // Dark Matter tile layer
+
+    // Default: CARTO Dark Matter (Dark neo-modern)
     return {
-      url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+      url: `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png${query}`,
       options: {
-        maxZoom: 19,
+        maxZoom: 20,
         subdomains: ['a', 'b', 'c', 'd'],
-        attribution: '&copy; CartoDB &copy; OpenStreetMap',
+        attribution: '&copy; CARTO &copy; OpenStreetMap contributors',
       },
     };
   };

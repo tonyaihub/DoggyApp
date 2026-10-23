@@ -140,47 +140,47 @@ export const ActiveWalkScreen: React.FC<ActiveWalkScreenProps> = ({
       {/* Photo Flash Animation */}
       {photoFlash && <div className="absolute inset-0 bg-white z-50 animate-out fade-out duration-300" />}
 
-      {/* Upper Metrics Panel */}
-      <div className="relative z-20 bg-zinc-950/95 border-b border-zinc-800/90 px-4 py-3 shadow-xl backdrop-blur-md">
+      {/* Upper Metrics HUD Panel */}
+      <div className="relative z-20 bg-zinc-950/75 border-b border-white/[0.07] px-4 py-2.5 shadow-xl backdrop-blur-2xl">
         <div className="max-w-4xl mx-auto flex items-center justify-between gap-3">
           {/* Live Indicator */}
           <div className="flex items-center gap-2">
-            <span className="relative flex h-3 w-3">
+            <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
             </span>
-            <span className="text-xs font-black tracking-widest text-emerald-400 uppercase">
+            <span className="text-[11px] font-mono font-bold tracking-widest text-emerald-400 uppercase">
               {t.walk.live_badge}
             </span>
-            <span className="text-xs text-zinc-500 hidden sm:inline">• {userPet.name}</span>
+            <span className="text-xs text-zinc-400 hidden sm:inline">· {userPet.name}</span>
           </div>
 
           {/* Quick Metrics Banner */}
-          <div className="flex items-center gap-4 sm:gap-8">
+          <div className="flex items-center gap-5 sm:gap-8">
             <div className="text-center">
-              <span className="block text-[10px] text-zinc-400 uppercase tracking-wider font-semibold">
+              <span className="block text-[9px] text-zinc-400 uppercase tracking-widest font-mono">
                 {t.walk.time}
               </span>
-              <span className="text-base sm:text-lg font-black text-white font-mono">
+              <span className="text-sm sm:text-base font-bold text-white font-mono tracking-tight">
                 {durationFormatted}
               </span>
             </div>
 
             <div className="text-center">
-              <span className="block text-[10px] text-zinc-400 uppercase tracking-wider font-semibold">
+              <span className="block text-[9px] text-zinc-400 uppercase tracking-widest font-mono">
                 {t.walk.distance}
               </span>
-              <span className="text-base sm:text-lg font-black text-indigo-400 font-mono">
-                {distanceKm} <span className="text-xs font-bold text-zinc-400">км</span>
+              <span className="text-sm sm:text-base font-bold text-indigo-300 font-mono tracking-tight">
+                {distanceKm} <span className="text-[10px] text-zinc-400 font-normal">км</span>
               </span>
             </div>
 
             <div className="text-center hidden xs:block">
-              <span className="block text-[10px] text-zinc-400 uppercase tracking-wider font-semibold">
+              <span className="block text-[9px] text-zinc-400 uppercase tracking-widest font-mono">
                 {t.walk.speed}
               </span>
-              <span className="text-base sm:text-lg font-black text-amber-400 font-mono">
-                {currentSpeedKmH} <span className="text-xs font-bold text-zinc-400">км/г</span>
+              <span className="text-sm sm:text-base font-bold text-amber-300 font-mono tracking-tight">
+                {currentSpeedKmH} <span className="text-[10px] text-zinc-400 font-normal">км/г</span>
               </span>
             </div>
           </div>
@@ -188,14 +188,14 @@ export const ActiveWalkScreen: React.FC<ActiveWalkScreenProps> = ({
           {/* Pocket Screen Lock Toggle */}
           <button
             onClick={toggleLock}
-            className={`px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${
+            className={`px-3 py-1 rounded-full border text-xs font-semibold flex items-center gap-1.5 transition-all ${
               isLocked
-                ? 'bg-amber-500/20 text-amber-300 border-amber-500 shadow-lg shadow-amber-950/40'
-                : 'bg-zinc-800 text-zinc-300 hover:text-white border-zinc-700'
+                ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
+                : 'bg-white/[0.04] text-zinc-300 hover:text-white border-white/10 hover:bg-white/[0.08]'
             }`}
             title={t.walk.lock_tip}
           >
-            {isLocked ? <Lock className="w-3.5 h-3.5 text-amber-400" /> : <Unlock className="w-3.5 h-3.5" />}
+            {isLocked ? <Lock className="w-3 h-3 text-amber-400" /> : <Unlock className="w-3 h-3 text-zinc-400" />}
             <span className="hidden sm:inline">{isLocked ? 'Заблоковано' : 'Блок'}</span>
           </button>
         </div>
@@ -248,29 +248,29 @@ export const ActiveWalkScreen: React.FC<ActiveWalkScreenProps> = ({
         )}
 
         {/* Floating Quick Action Buttons */}
-        <div className="absolute bottom-28 right-4 z-20 flex flex-col gap-2.5">
-          {/* Simulation step button for desktop/demo testing */}
+        <div className="absolute bottom-24 right-4 z-20 flex flex-col gap-2">
+          {/* Simulation step button */}
           <button
             onClick={simulateStep}
-            className="w-11 h-11 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 text-emerald-400 border border-zinc-700 shadow-xl backdrop-blur-md flex items-center justify-center transition active:scale-90"
+            className="w-10 h-10 rounded-2xl bg-zinc-950/70 hover:bg-zinc-900 border border-white/10 hover:border-white/20 text-emerald-400 shadow-xl backdrop-blur-xl flex items-center justify-center transition active:scale-90"
             title="Симуляція переміщення (крок)"
           >
-            <Footprints className="w-5 h-5" />
+            <Footprints className="w-4 h-4" />
           </button>
 
           {/* Quick Photo */}
           <button
             onClick={handlePhotoSnap}
-            className="w-11 h-11 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 text-indigo-400 border border-zinc-700 shadow-xl backdrop-blur-md flex items-center justify-center transition active:scale-90"
+            className="w-10 h-10 rounded-2xl bg-zinc-950/70 hover:bg-zinc-900 border border-white/10 hover:border-white/20 text-indigo-400 shadow-xl backdrop-blur-xl flex items-center justify-center transition active:scale-90"
             title={t.walk.take_photo}
           >
-            <Camera className="w-5 h-5" />
+            <Camera className="w-4 h-4" />
           </button>
 
           {/* Quick Dog-box */}
           <button
             onClick={handleDogBoxQuickMark}
-            className="w-11 h-11 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 text-emerald-400 border border-zinc-700 shadow-xl backdrop-blur-md flex items-center justify-center transition active:scale-90 text-base"
+            className="w-10 h-10 rounded-2xl bg-zinc-950/70 hover:bg-zinc-900 border border-white/10 hover:border-white/20 text-emerald-400 shadow-xl backdrop-blur-xl flex items-center justify-center transition active:scale-90 text-sm"
             title={t.walk.mark_dogbox}
           >
             💩
@@ -279,25 +279,25 @@ export const ActiveWalkScreen: React.FC<ActiveWalkScreenProps> = ({
           {/* Quick Hazard Marker */}
           <button
             onClick={onOpenHazardModal}
-            className="w-12 h-12 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white border-2 border-rose-400 shadow-2xl shadow-rose-950/60 flex items-center justify-center transition transform active:scale-90"
+            className="w-11 h-11 rounded-2xl bg-rose-600/90 hover:bg-rose-500 text-white border border-rose-400/60 shadow-[0_4px_20px_rgba(244,63,94,0.45)] flex items-center justify-center transition active:scale-90"
             title={t.walk.mark_hazard}
           >
-            <AlertTriangle className="w-6 h-6" />
+            <AlertTriangle className="w-5 h-5" />
           </button>
         </div>
       </div>
 
       {/* Bottom Protected Finish Bar (Hold 2 seconds) */}
-      <div className="relative z-20 bg-zinc-950/95 border-t border-zinc-800 px-6 py-4 backdrop-blur-md">
+      <div className="relative z-20 bg-zinc-950/80 border-t border-white/[0.08] px-6 py-3.5 backdrop-blur-2xl">
         <div className="max-w-md mx-auto flex flex-col items-center">
-          <div className="text-[11px] text-zinc-400 font-semibold mb-2">
+          <div className="text-[10px] text-zinc-400 font-mono tracking-wider mb-2">
             {t.walk.hold_to_finish}
           </div>
 
           <div className="relative w-full">
             {/* Progress fill layer */}
             <div
-              className="absolute inset-0 bg-rose-600 rounded-2xl transition-all pointer-events-none opacity-80"
+              className="absolute inset-0 bg-gradient-to-r from-rose-600 to-rose-500 rounded-2xl transition-all pointer-events-none opacity-90 shadow-[0_0_16px_rgba(244,63,94,0.4)]"
               style={{ width: `${holdProgress}%` }}
             />
 
@@ -307,11 +307,11 @@ export const ActiveWalkScreen: React.FC<ActiveWalkScreenProps> = ({
               onMouseLeave={handleHoldEnd}
               onTouchStart={handleHoldStart}
               onTouchEnd={handleHoldEnd}
-              className="relative z-10 w-full py-4 rounded-2xl bg-zinc-900 hover:bg-zinc-800 border-2 border-zinc-700 text-white font-black text-sm tracking-wider uppercase transition flex items-center justify-center gap-3 overflow-hidden shadow-xl"
+              className="relative z-10 w-full py-3.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-white font-semibold text-xs tracking-tight transition flex items-center justify-center gap-2 overflow-hidden shadow-xl select-none"
             >
-              <Square className="w-4 h-4 fill-rose-500 text-rose-500" />
+              <Square className="w-3.5 h-3.5 fill-rose-500 text-rose-500" />
               <span>
-                {holdProgress > 0 ? `${Math.round(holdProgress)}% ЗАВЕРШЕННЯ...` : '⏹️ ЗАВЕРШИТИ ВИГУЛ'}
+                {holdProgress > 0 ? `${Math.round(holdProgress)}% ЗАВЕРШЕННЯ...` : 'Завершити вигул'}
               </span>
             </button>
           </div>

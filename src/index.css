@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* Leaflet Dark Theme Overrides & Custom DivIcon resets */
+.leaflet-container {
+  background-color: #09090b !important;
+  font-family: inherit;
+}
+
+.custom-dog-marker,
+.custom-sos-marker,
+.custom-note-marker,
+.custom-perk-marker,
+.custom-user-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Custom scrollbar hiding */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

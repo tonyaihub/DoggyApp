@@ -1,0 +1,8 @@
+{
+  "name": "DogApp - Запоріжжя | Соціальна мережа & SOS-радар собак",
+  "description": "PWA для власників собак у Запоріжжі: GPS-трекер прогулянок у реальному часі, SOS-радар зниклих улюбленців, мапа дог-локацій та небезпек для 7 районів міста.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

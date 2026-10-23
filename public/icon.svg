@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Background with squircle safe-zone -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)" stroke="#27272a" stroke-width="8" />
+  
+  <!-- Radar circles -->
+  <circle cx="256" cy="270" r="180" fill="none" stroke="#6366f1" stroke-width="2" stroke-opacity="0.2" stroke-dasharray="8 8" />
+  <circle cx="256" cy="270" r="130" fill="none" stroke="#6366f1" stroke-width="3" stroke-opacity="0.35" />
+  <circle cx="256" cy="270" r="80" fill="none" stroke="#6366f1" stroke-width="2" stroke-opacity="0.5" />
+  
+  <!-- Pulse radar sweep -->
+  <path d="M 256 270 L 390 200 A 150 150 0 0 0 256 120 Z" fill="url(#accent)" opacity="0.15" />
+
+  <!-- Central Paw Icon -->
+  <g fill="url(#accent)" filter="url(#glow)">
+    <!-- Main pad -->
+    <path d="M 256 250 C 215 250, 195 285, 205 320 C 215 350, 240 365, 256 365 C 272 365, 297 350, 307 320 C 317 285, 297 250, 256 250 Z" />
+    <!-- Toe 1 (left) -->
+    <ellipse cx="180" cy="240" rx="22" ry="32" transform="rotate(-25 180 240)" />
+    <!-- Toe 2 (center-left) -->
+    <ellipse cx="225" cy="205" rx="22" ry="35" transform="rotate(-8 225 205)" />
+    <!-- Toe 3 (center-right) -->
+    <ellipse cx="287" cy="205" rx="22" ry="35" transform="rotate(8 287 205)" />
+    <!-- Toe 4 (right) -->
+    <ellipse cx="332" cy="240" rx="22" ry="32" transform="rotate(25 332 240)" />
+  </g>
+
+  <!-- GPS beacon pin pulse at top-right -->
+  <circle cx="380" cy="130" r="26" fill="#ef4444" opacity="0.25" />
+  <circle cx="380" cy="130" r="16" fill="#ef4444" />
+  <circle cx="380" cy="130" r="6" fill="#ffffff" />
+</svg>
